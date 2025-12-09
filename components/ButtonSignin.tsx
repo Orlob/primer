@@ -31,7 +31,7 @@ const ButtonSignin = ({
     return (
       <Link
         href={config.auth.callbackUrl}
-        className={`btn ${extraStyle ? extraStyle : ""}`}
+        className={`cursor-pointer ${extraStyle ? extraStyle : "btn"}`}
       >
         {session.user?.image ? (
           <img
@@ -54,7 +54,7 @@ const ButtonSignin = ({
 
   return (
     <button
-      className={`btn ${extraStyle ? extraStyle : ""}`}
+      className={`cursor-pointer ${extraStyle ? extraStyle : "btn"}`}
       onClick={handleClick}
     >
       {text}

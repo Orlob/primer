@@ -3,9 +3,6 @@
 import { useRef, useState } from "react";
 import type { JSX } from "react";
 
-// <FAQ> component is a lsit of <Item> component
-// Just import the FAQ & add your FAQ content to the const faqList arrayy below.
-
 interface FAQItemProps {
   question: string;
   answer: JSX.Element;
@@ -13,22 +10,51 @@ interface FAQItemProps {
 
 const faqList: FAQItemProps[] = [
   {
-    question: "What do I get exactly?",
-    answer: <div className="space-y-2 leading-relaxed">Loreum Ipseum</div>,
-  },
-  {
-    question: "Can I get a refund?",
+    question: "How does Primer connect to HubSpot?",
     answer: (
-      <p>
-        Yes! You can request a refund within 7 days of your purchase. Reach out
-        by email.
-      </p>
+      <div className="space-y-2 leading-relaxed text-gray-700">
+        Primer connects directly to your HubSpot account via OAuth. Once connected, 
+        it automatically syncs with your CRM to pull emails, notes, calls, tasks, deal status, 
+        and contact information for each meeting.
+      </div>
     ),
   },
   {
-    question: "I have another question",
+    question: "What data does Primer analyze?",
     answer: (
-      <div className="space-y-2 leading-relaxed">Cool, contact us by email</div>
+      <div className="space-y-2 leading-relaxed text-gray-700">
+        Primer analyzes all relevant CRM activity including emails, notes, calls, tasks, 
+        deal status, contact details, and timeline events. It uses AI to identify what matters 
+        most for each specific meeting context and surfaces only the most relevant information.
+      </div>
+    ),
+  },
+  {
+    question: "How long does it take to prepare a briefing?",
+    answer: (
+      <div className="space-y-2 leading-relaxed text-gray-700">
+        Briefings are generated automatically and instantly. Once Primer is connected to your 
+        HubSpot account and calendar, it prepares briefings for all upcoming meetings in real-time. 
+        You can access them anytime before your meeting.
+      </div>
+    ),
+  },
+  {
+    question: "Is my data secure?",
+    answer: (
+      <div className="space-y-2 leading-relaxed text-gray-700">
+        Yes. Primer uses secure OAuth connections and follows industry-standard security practices. 
+        Your data is encrypted in transit and at rest. We never store your HubSpot credentials.
+      </div>
+    ),
+  },
+  {
+    question: "Can I customize the briefing format?",
+    answer: (
+      <div className="space-y-2 leading-relaxed text-gray-700">
+        Yes, Team plans include custom briefing templates. You can structure briefings to match 
+        your workflow and preferences.
+      </div>
     ),
   },
 ];
@@ -40,7 +66,7 @@ const FaqItem = ({ item }: { item: FAQItemProps }) => {
   return (
     <li>
       <button
-        className="relative flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-base-content/10"
+        className="relative flex gap-2 items-center w-full py-5 text-base font-semibold text-left md:text-lg border-t border-gray-300"
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);
@@ -48,39 +74,30 @@ const FaqItem = ({ item }: { item: FAQItemProps }) => {
         aria-expanded={isOpen}
       >
         <span
-          className={`flex-1 text-base-content ${isOpen ? "text-primary" : ""}`}
+          className={`flex-1 ${isOpen ? "text-[#3A5AFE]" : "text-gray-900"}`}
         >
           {item?.question}
         </span>
         <svg
-          className={`flex-shrink-0 w-4 h-4 ml-auto fill-current`}
-          viewBox="0 0 16 16"
-          xmlns="http://www.w3.org/2000/svg"
+          className={`flex-shrink-0 w-4 h-4 ml-auto transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
         >
-          <rect
-            y="7"
-            width="16"
-            height="2"
-            rx="1"
-            className={`transform origin-center transition duration-200 ease-out ${
-              isOpen && "rotate-180"
-            }`}
-          />
-          <rect
-            y="7"
-            width="16"
-            height="2"
-            rx="1"
-            className={`transform origin-center rotate-90 transition duration-200 ease-out ${
-              isOpen && "rotate-180 hidden"
-            }`}
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19 9l-7 7-7-7"
           />
         </svg>
       </button>
 
       <div
         ref={accordion}
-        className={`transition-all duration-300 ease-in-out opacity-80 overflow-hidden`}
+        className={`transition-all duration-300 ease-in-out overflow-hidden`}
         style={
           isOpen
             ? { maxHeight: accordion?.current?.scrollHeight, opacity: 1 }
@@ -95,11 +112,13 @@ const FaqItem = ({ item }: { item: FAQItemProps }) => {
 
 const FAQ = () => {
   return (
-    <section className="bg-base-200" id="faq">
-      <div className="py-24 px-8 max-w-7xl mx-auto flex flex-col md:flex-row gap-12">
+    <section className="bg-gray-100" id="faq">
+      <div className="py-16 md:py-24 px-8 max-w-[960px] mx-auto flex flex-col md:flex-row gap-12">
         <div className="flex flex-col text-left basis-1/2">
-          <p className="inline-block font-semibold text-primary mb-4">FAQ</p>
-          <p className="sm:text-4xl text-3xl font-extrabold text-base-content">
+          <p className="inline-block font-semibold text-[#3A5AFE] mb-4 text-sm uppercase tracking-wide">
+            FAQ
+          </p>
+          <p className="sm:text-4xl text-3xl font-semibold text-gray-900">
             Frequently Asked Questions
           </p>
         </div>

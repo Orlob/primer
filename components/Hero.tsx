@@ -1,49 +1,459 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import TestimonialsAvatars from "./TestimonialsAvatars";
+import ButtonSignin from "./ButtonSignin";
+import ButtonDemo from "./ButtonDemo";
+import { Calendar, Clock, FileText, CheckCircle2, TrendingUp, Users, Building2, Mail, Phone, Target, ListChecks } from "lucide-react";
 import config from "@/config";
 
 const Hero = () => {
+  const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  const demoBriefing = {
+    title: "Q4 Strategy Review - Acme Corporation",
+    date: "Today, 2:00 PM",
+    duration: "60 min",
+    type: "Sales Call",
+    description: "Quarterly strategy review to discuss Q4 performance, expansion opportunities, and plan for Q1 2024. Focus on scaling the partnership and exploring new product integrations.",
+    whyMeeting: "Expansion opportunity with existing customer. They're interested in expanding to additional departments and exploring new features.",
+    keyTalkingPoints: [
+      "Review Q4 performance metrics and ROI",
+      "Discuss expansion to 3 additional departments",
+      "Explore new product integrations",
+      "Align on implementation timeline",
+    ],
+    focusOn: {
+      name: "Sarah Johnson",
+      role: "VP of Sales",
+    },
+    accountStatus: {
+      type: "Enterprise",
+      engagement: "High",
+      health: "Strong",
+      dealValue: "$45,000",
+      dealStage: "Closing",
+    },
+    company: {
+      name: "Acme Corporation",
+      size: "500-1000 employees",
+      industry: "Technology & Software",
+    },
+    communications: [
+      { type: "Email", date: "Jan 10, 2024", title: "Q4 Review & Q1 Planning", summary: "Budget approved for expansion." },
+      { type: "Call", date: "Jan 5, 2024", title: "Discovery Call", summary: "Discussed expansion to 3 departments." },
+    ],
+    strategicGuidance: [
+      "Start with success: highlight Q4 wins and ROI",
+      "Map expansion plan for 3 departments",
+      "Address concerns proactively",
+    ],
+    actionItems: [
+      { text: "Review Q4 performance metrics", completed: true },
+      { text: "Prepare expansion proposal", completed: true },
+      { text: "Draft implementation timeline", completed: false },
+    ],
+  };
+
   return (
-    <section className="max-w-7xl mx-auto bg-base-100 flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-20 px-8 py-8 lg:py-20">
-      <div className="flex flex-col gap-10 lg:gap-14 items-center justify-center text-center lg:text-left lg:items-start">
-        <a
-          href="https://www.producthunt.com/posts/shipfast-2?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-shipfast&#0045;2"
-          target="_blank"
-          className=" -mb-4 md:-mb-6 group"
-          title="Product Hunt link"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 122 37"
-            className="w-32 md:w-36 fill-base-content/80 group-hover:fill-base-content"
-          >
-            <path d="M104.953 36.286c-4.22 1.634-5.936.086-5.936-.891 1.495-.126 5.067-.331 5.936.891Zm5.356-1.336a5.486 5.486 0 0 1-7.083-.497c1.44-.4 5.372-.874 7.083.497Zm-7.139-3.176c.16 2.033-1.922 3.176-4.17 3.341.41-2.045 2.509-2.958 4.17-3.341Zm4.032-1.874c.238.869-.089 3.228-3.323 4.164.139-1.593.986-3.667 3.323-4.164Zm6.413 2.365a5.005 5.005 0 0 1-6.385.571c1.296-.668 4.408-1.57 6.385-.571Zm-3.417-4.706c.443.856.537 3.295-2.326 4.763-.166-1.57.465-4.255 2.326-4.763Zm7.083.948a4.389 4.389 0 0 1-2.657 2.217 4.243 4.243 0 0 1-3.39-.44c1.805-1.697 4.685-2.348 6.047-1.777Zm-4.28-4.547c1.284 2.24-.073 4.798-1.485 5.849-.628-2.082-.052-4.351 1.484-5.849Zm6.662-.097c.155 3.479-3.478 3.29-5.184 3.313.537-.731 3.522-3.381 5.184-3.313Zm-4.48-3.25c.675.743 1.688 3.599-.555 5.929-.703-1.685-.858-4.272.554-5.929Zm6.385-1.542c.116 2.81-2.249 4.232-4.53 4.21.686-1.354 2.52-3.964 4.53-4.21Zm-4.785-1.936c1.512.89 1.34 3.764.448 5.26-1.002-1.393-1.75-3.124-.448-5.26Zm4.884-2.633c.748 2.559-1.45 4.29-2.769 4.438.338-1.222.781-3.387 2.77-4.438Zm-4.607-.851c1.667.835 2.457 2.832 1.833 4.632-1.163-.937-2.564-2.919-1.833-4.632Zm4.685-3.096c1.03 3.113-1.335 4.13-2.215 4.38.105-1.324.947-3.963 2.215-4.38Zm-4.619-.817c.676.195 2.603 1.777 2.254 4.61-1.268-.714-2.808-2.074-2.254-4.61Zm3.921-3.9c1.152 3.826-.77 5.397-1.401 5.71-.1-1.21-.222-4.037 1.401-5.71Zm-4.264.096c1.207.337 2.73 2.553 2.658 4.684-1.196-.548-2.985-2.827-2.658-4.684Zm.36-5.934c2.802 2.896 3.195 5.18 2.376 7.996-1.269-1.142-2.282-4.569-2.376-7.996ZM17.047 36.286c4.22 1.634 5.936.086 5.936-.891-1.495-.126-5.067-.331-5.936.891ZM11.69 34.95a5.486 5.486 0 0 0 7.083-.497c-1.44-.4-5.372-.874-7.083.497Zm7.139-3.176c-.16 2.033 1.922 3.176 4.17 3.341-.41-2.045-2.509-2.958-4.17-3.341ZM14.798 29.9c-.238.869.089 3.228 3.323 4.164-.139-1.593-.986-3.667-3.323-4.164Zm-6.413 2.365a5.005 5.005 0 0 0 6.385.571c-1.296-.668-4.408-1.57-6.385-.571Zm3.417-4.706c-.443.856-.537 3.295 2.326 4.763.166-1.57-.465-4.255-2.326-4.763Zm-7.083.948a4.389 4.389 0 0 0 2.657 2.217 4.243 4.243 0 0 0 3.39-.44c-1.805-1.697-4.685-2.348-6.047-1.777Zm4.28-4.547c-1.284 2.24.073 4.798 1.485 5.849.628-2.082.052-4.351-1.484-5.849Zm-6.662-.097c-.155 3.479 3.478 3.29 5.184 3.313-.537-.731-3.522-3.381-5.184-3.313Zm4.48-3.25c-.675.743-1.688 3.599.555 5.929.703-1.685.858-4.272-.554-5.929ZM.433 19.071c-.116 2.81 2.249 4.232 4.53 4.21-.686-1.354-2.52-3.964-4.53-4.21Zm4.785-1.936c-1.512.89-1.34 3.764-.448 5.26 1.002-1.393 1.75-3.124.448-5.26ZM.333 14.502c-.748 2.559 1.45 4.29 2.769 4.438-.338-1.222-.781-3.387-2.77-4.438Zm4.607-.851c-1.667.835-2.457 2.832-1.833 4.632 1.163-.937 2.564-2.919 1.833-4.632ZM.255 10.555c-1.03 3.113 1.335 4.13 2.215 4.38-.105-1.324-.947-3.963-2.215-4.38Zm4.619-.817c-.676.195-2.603 1.777-2.254 4.61 1.268-.714 2.808-2.074 2.254-4.61Zm-3.921-3.9c-1.152 3.826.77 5.397 1.401 5.71.1-1.21.222-4.037-1.401-5.71Zm4.264.096c-1.207.337-2.73 2.553-2.658 4.684 1.196-.548 2.985-2.827 2.658-4.684ZM4.857 0C2.055 2.896 1.662 5.18 2.481 7.996 3.75 6.854 4.763 3.427 4.857 0Zm47.017 35.234c2.394 0 4.302-1.476 4.302-3.762 0-1.71-1.062-2.7-2.16-3.15.864-.378 1.728-1.26 1.728-2.7 0-2.142-1.818-3.366-3.834-3.366-1.656 0-2.952.81-3.636 1.89a.285.285 0 0 0 .072.396l1.26 1.224c.144.144.306.162.414-.036.324-.576.9-.954 1.602-.954.81 0 1.44.54 1.44 1.332 0 .612-.36 1.296-1.386 1.296h-.486c-.18 0-.306.09-.306.288v1.638c0 .18.126.288.306.288h.504c1.26 0 1.692.846 1.692 1.53 0 .81-.576 1.566-1.692 1.566-.828 0-1.404-.45-1.89-1.026-.144-.144-.288-.144-.396-.036l-1.35 1.242a.258.258 0 0 0-.054.378c.684 1.08 1.998 1.962 3.87 1.962ZM60.208 35c.162 0 .288-.108.288-.27v-4.248c0-1.314.684-2.034 1.818-2.034.27 0 .468.036.648.09.252.054.378 0 .378-.234v-1.746c0-.162-.036-.27-.162-.36-.144-.108-.378-.234-.81-.234-1.026 0-1.584.72-1.872 1.674l-.09-1.17c0-.216-.108-.288-.27-.288h-2.124c-.162 0-.27.108-.27.27v8.28c0 .162.108.27.27.27h2.196Zm8.1.216c1.26 0 2.16-.504 2.754-1.35l.036.864c0 .162.126.27.288.27h1.98c.162 0 .306-.108.306-.27V22.4c0-.162-.126-.27-.288-.27H71.17c-.162 0-.27.108-.27.27v4.662c-.594-.702-1.44-1.098-2.592-1.098-2.448 0-4.14 2.016-4.14 4.626 0 2.628 1.692 4.626 4.14 4.626Zm.594-2.502c-1.17 0-2.052-.828-2.052-2.124 0-1.278.882-2.124 2.052-2.124 1.206 0 2.034.846 2.034 2.106 0 1.296-.828 2.142-2.034 2.142ZM20.72 15c.09 0 .15-.06.15-.15v-2.26h.72c1.69 0 2.49-.93 2.49-2.29 0-1.36-.8-2.3-2.49-2.3h-2.15c-.09 0-.15.06-.15.15v6.7c0 .09.06.15.15.15h1.28Zm.15-5.6h.68c.53 0 1.02.17 1.02.9 0 .72-.49.89-1.02.89h-.68V9.4Zm5.5 5.6c.09 0 .16-.06.16-.15v-2.36c0-.73.38-1.13 1.01-1.13.15 0 .26.02.36.05.14.03.21 0 .21-.13v-.97c0-.09-.02-.15-.09-.2-.08-.06-.21-.13-.45-.13-.57 0-.88.4-1.04.93l-.05-.65c0-.12-.06-.16-.15-.16h-1.18c-.09 0-.15.06-.15.15v4.6c0 .09.06.15.15.15h1.22Zm4.77.12c1.48 0 2.58-1.12 2.58-2.57 0-1.45-1.1-2.57-2.58-2.57s-2.57 1.12-2.57 2.57c0 1.45 1.09 2.57 2.57 2.57Zm0-1.4c-.62 0-1.1-.45-1.1-1.17s.48-1.17 1.1-1.17c.62 0 1.1.45 1.1 1.17s-.48 1.17-1.1 1.17Zm5.49 1.4c.7 0 1.2-.28 1.53-.75l.02.48c0 .09.07.15.16.15h1.1c.09 0 .17-.06.17-.15V8c0-.09-.07-.15-.16-.15h-1.23c-.09 0-.15.06-.15.15v2.59c-.33-.39-.8-.61-1.44-.61-1.36 0-2.3 1.12-2.3 2.57 0 1.46.94 2.57 2.3 2.57Zm.33-1.39c-.65 0-1.14-.46-1.14-1.18 0-.71.49-1.18 1.14-1.18.67 0 1.13.47 1.13 1.17 0 .72-.46 1.19-1.13 1.19Zm5.52 1.39c.71 0 1.16-.35 1.44-.85l.04.57c0 .12.07.16.16.16h1.17c.09 0 .16-.06.16-.15v-4.6c0-.09-.07-.15-.16-.15h-1.21c-.09 0-.16.06-.16.15v2.48c0 .65-.33.99-.85.99-.54 0-.82-.34-.82-.99v-2.48c0-.09-.07-.15-.16-.15h-1.22c-.09 0-.15.06-.15.15v2.84c0 1.28.74 2.03 1.76 2.03Zm6.44 0c.79 0 1.45-.35 1.87-.9.06-.07.05-.15-.01-.21l-.69-.66c-.08-.08-.19-.08-.26-.01-.27.25-.53.38-.86.38-.74 0-1.18-.56-1.18-1.2 0-.63.44-1.14 1.16-1.14.34 0 .6.12.86.38.08.07.19.07.27-.01l.69-.66c.06-.06.07-.15.01-.21-.42-.55-1.08-.9-1.9-.9-1.48 0-2.56 1.1-2.56 2.54 0 1.47 1.1 2.6 2.6 2.6Zm4.77 0c.34 0 .88-.06.88-.31v-.83c0-.1-.08-.15-.18-.14-.13.01-.22.01-.31.01-.25 0-.42-.14-.42-.41v-2.16h.75c.09 0 .15-.06.15-.15v-.88c0-.09-.06-.15-.15-.15h-.75V8.95c0-.09-.07-.15-.16-.15h-1.23c-.09 0-.16.06-.16.15v1.15h-.61c-.09 0-.15.06-.15.15v.88c0 .09.06.15.15.15h.61v2.33c0 1.14.77 1.51 1.58 1.51Zm5.95 0c1.48 0 2.58-1.12 2.58-2.57 0-1.45-1.1-2.57-2.58-2.57s-2.57 1.12-2.57 2.57c0 1.45 1.09 2.57 2.57 2.57Zm0-1.4c-.62 0-1.1-.45-1.1-1.17s.48-1.17 1.1-1.17c.62 0 1.1.45 1.1 1.17s-.48 1.17-1.1 1.17ZM64.79 15c.09 0 .16-.06.16-.15v-3.57h.98c.09 0 .15-.06.15-.15v-.88c0-.09-.06-.15-.15-.15h-.98v-.49c0-.33.11-.57.58-.57.11 0 .25.03.42.06.07.01.13 0 .13-.07V8.02c0-.06-.03-.13-.09-.16-.3-.15-.52-.17-.82-.17-1.09 0-1.76.52-1.76 1.72v.69h-.58c-.09 0-.15.06-.15.15v.88c0 .09.06.15.15.15h.58v3.57c0 .09.06.15.15.15h1.23Zm6.08.12c.34 0 .88-.06.88-.31v-.83c0-.1-.08-.15-.18-.14-.13.01-.22.01-.31.01-.25 0-.42-.14-.42-.41v-2.16h.75c.09 0 .15-.06.15-.15v-.88c0-.09-.06-.15-.15-.15h-.75V8.95c0-.09-.07-.15-.16-.15h-1.23c-.09 0-.16.06-.16.15v1.15h-.61c-.09 0-.15.06-.15.15v.88c0 .09.06.15.15.15h.61v2.33c0 1.14.77 1.51 1.58 1.51Zm4.65-5.14c-.7 0-1.15.35-1.43.85V8c0-.09-.07-.15-.16-.15h-1.22c-.09 0-.15.06-.15.15v6.85c0 .09.06.15.15.15h1.22c.09 0 .16-.06.16-.15v-2.48c0-.65.32-.99.85-.99.54 0 .82.34.82.99v2.48c0 .09.07.15.16.15h1.21c.09 0 .16-.06.16-.15v-2.84c0-1.28-.75-2.03-1.77-2.03Zm5.34 5.14c.69 0 1.32-.2 1.74-.62.09-.08.09-.16.05-.22l-.41-.58c-.06-.07-.1-.09-.18-.05-.41.23-.75.27-1.08.27-.7 0-1.16-.26-1.33-.79h2.82c.45 0 .58-.3.58-.8 0-1.26-.87-2.35-2.37-2.35-1.51 0-2.52 1.11-2.52 2.55 0 1.49 1.09 2.59 2.7 2.59Zm-1.23-3.05c.12-.58.55-.83 1.06-.83s.9.24 1 .83h-2.06Zm8.27 3.05c.7 0 1.2-.28 1.53-.75l.02.48c0 .09.07.15.16.15h1.1c.09 0 .17-.06.17-.15V8c0-.09-.07-.15-.16-.15h-1.23c-.09 0-.15.06-.15.15v2.59c-.33-.39-.8-.61-1.44-.61-1.36 0-2.3 1.12-2.3 2.57 0 1.46.94 2.57 2.3 2.57Zm.33-1.39c-.65 0-1.14-.46-1.14-1.18 0-.71.49-1.18 1.14-1.18.67 0 1.13.47 1.13 1.17 0 .72-.46 1.19-1.13 1.19Zm5.81 1.39c.7 0 1.2-.28 1.53-.75l.02.48c0 .09.07.15.16.15h1.1c.09 0 .17-.06.17-.15v-4.6c0-.09-.07-.15-.16-.15h-1.11c-.09 0-.16.06-.16.15l-.02.47c-.32-.46-.81-.74-1.53-.74-1.36 0-2.3 1.12-2.3 2.57 0 1.46.94 2.57 2.3 2.57Zm.33-1.39c-.65 0-1.14-.46-1.14-1.18 0-.71.49-1.18 1.14-1.18.67 0 1.13.47 1.13 1.17 0 .72-.46 1.19-1.13 1.19Zm5.96 3.17c.08 0 .15-.04.18-.12l2.6-6.51c.04-.11-.02-.17-.13-.17h-1.24c-.08 0-.16.04-.19.12l-1.08 3-1.08-3c-.03-.08-.11-.12-.19-.12h-1.24c-.11 0-.17.06-.13.17l1.9 4.74-.72 1.71c-.05.12.01.18.13.18h1.19Z"></path>
-          </svg>
-        </a>
+    <section className="max-w-[960px] mx-auto px-8 py-16 lg:py-24">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16">
+        <div className={`flex flex-col gap-8 lg:gap-10 items-center lg:items-start text-center lg:text-left flex-1 transition-all duration-700 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        }`}>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#E8EDFF] rounded-full text-sm font-medium text-[#3A5AFE] animate-pulse">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-4 h-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z"
+              />
+            </svg>
+            AI-powered Meeting Preparation
+          </div>
 
-        <h1 className="font-extrabold text-4xl lg:text-6xl tracking-tight md:-mb-4">
-          Ship your startup in days, not weeks
-        </h1>
-        <p className="text-lg opacity-80 leading-relaxed">
-          The NextJS boilerplate with all you need to build your SaaS, AI tool,
-          or any other web app. From idea to production in 5 minutes.
-        </p>
-        <button className="btn btn-primary btn-wide">
-          Get {config.appName}
-        </button>
+          <h1 className="font-semibold text-4xl lg:text-5xl xl:text-6xl tracking-tight text-gray-900 max-w-2xl">
+            Turn all CRM activity into a clean,{" "}
+            <span className="text-[#3A5AFE] relative inline-block">
+              <span className="relative z-10">actionable briefing</span>
+              <span className="absolute bottom-0 left-0 right-0 h-2 bg-[#E8EDFF] -z-0 animate-pulse"></span>
+            </span>—automatically.
+          </h1>
+          
+          <p className="text-lg text-gray-700 leading-relaxed max-w-xl">
+            Primer connects directly to HubSpot and pulls the most relevant data for an upcoming meeting. 
+            Instead of digging through a chaotic timeline, you receive a precise, AI-generated summary tailored to the meeting context.
+          </p>
 
-        <TestimonialsAvatars priority={true} />
+          <div className="flex flex-col sm:flex-row gap-4 items-center">
+            <ButtonDemo 
+              text="Watch Demo" 
+              extraStyle="bg-[#3A5AFE] hover:bg-[#2A3FCC] text-white px-6 py-3 rounded-lg font-medium transition-all duration-150 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2 cursor-pointer" 
+            />
+            <ButtonSignin 
+              text="Start Free Trial" 
+              extraStyle="bg-white hover:bg-gray-50 text-gray-900 border-2 border-gray-300 hover:border-[#3A5AFE] px-6 py-3 rounded-lg font-medium transition-all duration-150 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] cursor-pointer" 
+            />
+          </div>
+
+          <div className="flex items-center gap-6 pt-4">
+            <div className="flex items-center gap-2 group">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="w-8 h-8 rounded-full bg-gradient-to-br from-[#3A5AFE] to-[#2A3FCC] border-2 border-white transition-transform duration-300 group-hover:scale-110"
+                    style={{ 
+                      zIndex: 5 - i,
+                      animationDelay: `${i * 100}ms`,
+                      animation: `float 3s ease-in-out infinite`
+                    }}
+                  />
+                ))}
+              </div>
+              <span className="text-sm text-gray-600 font-medium">500+ active users</span>
+            </div>
+            <div className="flex items-center gap-1">
+              {[...Array(5)].map((_, i) => (
+                <svg
+                  key={i}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-4 h-4 text-yellow-400 transition-transform duration-200 hover:scale-125"
+                  style={{ animationDelay: `${i * 50}ms` }}
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              ))}
+              <span className="text-sm text-gray-600 font-medium ml-1">4.8/5</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Demo Briefing - Using Meeting Structure */}
+        <div className={`flex-1 w-full lg:w-auto max-w-md transition-all duration-700 ${
+          isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
+        }`}>
+          <div className="relative group">
+            {/* HubSpot Integration Badge - Top Right */}
+            <div className="absolute -top-4 -right-4 z-10 flex items-center gap-3 px-5 py-3 bg-white border-2 border-[#FF7A59] rounded-xl shadow-2xl animate-bounce hover:animate-none transition-all duration-200 hover:scale-105">
+              <div className="w-8 h-8 rounded-lg bg-[#FF7A59] flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-sm">H</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-gray-900 leading-tight">HubSpot</span>
+                <span className="text-xs text-gray-600 leading-tight">Integrated</span>
+              </div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#22C55E] rounded-full border-2 border-white animate-pulse"></div>
+            </div>
+
+            <div className="absolute inset-0 bg-gradient-to-br from-[#3A5AFE]/20 to-[#2A3FCC]/10 rounded-2xl blur-3xl group-hover:blur-2xl transition-all duration-500"></div>
+            
+            <div className="relative bg-white rounded-xl border border-gray-200 shadow-2xl overflow-hidden transition-all duration-300 group-hover:shadow-3xl group-hover:scale-[1.02]">
+              {/* Meeting Header */}
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 border-b border-gray-200 p-6">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{demoBriefing.title}</h3>
+                    <div className="flex items-center gap-4 text-xs text-gray-600">
+                      <div className="flex items-center gap-1.5">
+                        <Calendar size={14} className="text-[#3A5AFE]" />
+                        <span>{demoBriefing.date}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Clock size={14} className="text-[#3A5AFE]" />
+                        <span>{demoBriefing.duration}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span className="px-3 py-1 text-xs font-medium bg-[#E8EDFF] text-[#3A5AFE] rounded-full transition-all duration-200 hover:bg-[#3A5AFE] hover:text-white">
+                    {demoBriefing.type}
+                  </span>
+                </div>
+              </div>
+
+              {/* Meeting Content - Scrollable */}
+              <div className="p-6 space-y-4 max-h-[600px] overflow-y-auto custom-scrollbar">
+                {/* Meeting Summary */}
+                <div 
+                  className="bg-gray-50 rounded-lg p-4 border border-gray-200 transition-all duration-200 hover:bg-white hover:border-[#3A5AFE]/30 hover:shadow-md cursor-pointer"
+                  onMouseEnter={() => setHoveredSection("summary")}
+                  onMouseLeave={() => setHoveredSection(null)}
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <FileText size={16} className={`text-[#3A5AFE] transition-transform duration-200 ${
+                      hoveredSection === "summary" ? "scale-110 rotate-3" : ""
+                    }`} />
+                    <h4 className="text-sm font-semibold text-gray-900">Meeting Information</h4>
+                  </div>
+                  <p className="text-xs text-gray-700 mb-3 leading-relaxed">{demoBriefing.description}</p>
+                  <div className="mb-3 p-3 bg-white rounded-lg transition-all duration-200 hover:bg-[#E8EDFF]">
+                    <h5 className="text-xs font-semibold text-gray-900 mb-1">Why are we meeting?</h5>
+                    <p className="text-xs text-gray-700 leading-relaxed">{demoBriefing.whyMeeting}</p>
+                  </div>
+                  <div className="space-y-1.5">
+                    {demoBriefing.keyTalkingPoints.map((point, index) => (
+                      <div 
+                        key={index} 
+                        className="flex items-start gap-2 text-xs text-gray-700 transition-all duration-200 hover:text-[#3A5AFE]"
+                        style={{ animationDelay: `${index * 100}ms` }}
+                      >
+                        <CheckCircle2 size={12} className="text-[#3A5AFE] mt-0.5 flex-shrink-0 transition-transform duration-200 hover:scale-125" />
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Focus On */}
+                <div 
+                  className="bg-[#E8EDFF] rounded-lg p-4 border border-[#3A5AFE]/20 transition-all duration-200 hover:border-[#3A5AFE] hover:shadow-md cursor-pointer"
+                  onMouseEnter={() => setHoveredSection("focus")}
+                  onMouseLeave={() => setHoveredSection(null)}
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <Users size={16} className={`text-[#3A5AFE] transition-transform duration-200 ${
+                      hoveredSection === "focus" ? "scale-110" : ""
+                    }`} />
+                    <h4 className="text-sm font-semibold text-gray-900">Focus On</h4>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#3A5AFE] flex items-center justify-center text-white font-semibold text-sm transition-transform duration-200 hover:scale-110 hover:rotate-6">
+                      {demoBriefing.focusOn.name.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-gray-900">{demoBriefing.focusOn.name}</div>
+                      <div className="text-xs text-gray-600">{demoBriefing.focusOn.role}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Company Overview */}
+                <div 
+                  className="bg-gray-50 rounded-lg p-4 border border-gray-200 transition-all duration-200 hover:bg-white hover:border-[#3A5AFE]/30 hover:shadow-md cursor-pointer"
+                  onMouseEnter={() => setHoveredSection("company")}
+                  onMouseLeave={() => setHoveredSection(null)}
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <Building2 size={16} className={`text-[#3A5AFE] transition-transform duration-200 ${
+                      hoveredSection === "company" ? "scale-110 rotate-3" : ""
+                    }`} />
+                    <h4 className="text-sm font-semibold text-gray-900">Company Overview</h4>
+                  </div>
+                  <div className="text-sm font-semibold text-gray-900 mb-2">{demoBriefing.company.name}</div>
+                  <div className="space-y-1 text-xs text-gray-600">
+                    <div className="flex items-center gap-2 transition-colors duration-200 hover:text-[#3A5AFE]">
+                      <Users size={12} />
+                      <span>{demoBriefing.company.size}</span>
+                    </div>
+                    <div className="flex items-center gap-2 transition-colors duration-200 hover:text-[#3A5AFE]">
+                      <Building2 size={12} />
+                      <span>{demoBriefing.company.industry}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Account Status */}
+                <div 
+                  className="bg-gray-50 rounded-lg p-4 border border-gray-200 transition-all duration-200 hover:bg-white hover:border-[#3A5AFE]/30 hover:shadow-md cursor-pointer"
+                  onMouseEnter={() => setHoveredSection("account")}
+                  onMouseLeave={() => setHoveredSection(null)}
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <TrendingUp size={16} className={`text-[#3A5AFE] transition-transform duration-200 ${
+                      hoveredSection === "account" ? "scale-110 rotate-3" : ""
+                    }`} />
+                    <h4 className="text-sm font-semibold text-gray-900">Account Status</h4>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 mb-3">
+                    <div className="transition-transform duration-200 hover:scale-105">
+                      <div className="text-xs text-gray-500 mb-1">Type</div>
+                      <div className="text-xs font-semibold text-gray-900">{demoBriefing.accountStatus.type}</div>
+                    </div>
+                    <div className="transition-transform duration-200 hover:scale-105">
+                      <div className="text-xs text-gray-500 mb-1">Engagement</div>
+                      <div className="text-xs font-semibold text-gray-900">{demoBriefing.accountStatus.engagement}</div>
+                    </div>
+                    <div className="transition-transform duration-200 hover:scale-105">
+                      <div className="text-xs text-gray-500 mb-1">Health</div>
+                      <span className="inline-block px-2 py-0.5 text-xs font-medium rounded-full text-green-700 bg-green-50 transition-all duration-200 hover:bg-green-100">
+                        {demoBriefing.accountStatus.health}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="pt-3 border-t border-gray-200">
+                    <div className="flex items-center justify-between mb-1 transition-colors duration-200 hover:text-[#3A5AFE]">
+                      <span className="text-xs text-gray-500">Deal Value</span>
+                      <span className="text-sm font-semibold text-gray-900">{demoBriefing.accountStatus.dealValue}</span>
+                    </div>
+                    <div className="flex items-center justify-between transition-colors duration-200 hover:text-[#3A5AFE]">
+                      <span className="text-xs text-gray-500">Stage</span>
+                      <span className="text-xs font-medium text-[#3A5AFE]">{demoBriefing.accountStatus.dealStage}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Past Communication */}
+                <div 
+                  className="bg-gray-50 rounded-lg p-4 border border-gray-200 transition-all duration-200 hover:bg-white hover:border-[#3A5AFE]/30 hover:shadow-md cursor-pointer"
+                  onMouseEnter={() => setHoveredSection("communication")}
+                  onMouseLeave={() => setHoveredSection(null)}
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <Mail size={16} className={`text-[#3A5AFE] transition-transform duration-200 ${
+                      hoveredSection === "communication" ? "scale-110 rotate-3" : ""
+                    }`} />
+                    <h4 className="text-sm font-semibold text-gray-900">Past Communication</h4>
+                  </div>
+                  <div className="space-y-3">
+                    {demoBriefing.communications.map((comm, index) => (
+                      <div 
+                        key={index} 
+                        className="flex items-start gap-2 pb-2 border-b border-gray-200 last:border-0 last:pb-0 transition-all duration-200 hover:bg-white hover:rounded-lg hover:p-2 -mx-2"
+                      >
+                        <div className="w-6 h-6 rounded-full bg-[#E8EDFF] flex items-center justify-center flex-shrink-0 transition-transform duration-200 hover:scale-110 hover:bg-[#3A5AFE] group">
+                          {comm.type === "Email" ? (
+                            <Mail size={12} className="text-[#3A5AFE] group-hover:text-white transition-colors" />
+                          ) : (
+                            <Phone size={12} className="text-[#3A5AFE] group-hover:text-white transition-colors" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1.5 mb-1">
+                            <span className="text-xs font-medium text-gray-900">{comm.type}</span>
+                            <span className="text-xs text-gray-500">—</span>
+                            <span className="text-xs font-medium text-gray-900 truncate">{comm.title}</span>
+                            <span className="text-xs text-gray-500">{comm.date}</span>
+                          </div>
+                          <p className="text-xs text-gray-600">{comm.summary}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Strategic Guidance */}
+                <div 
+                  className="bg-gray-50 rounded-lg p-4 border border-gray-200 transition-all duration-200 hover:bg-white hover:border-[#3A5AFE]/30 hover:shadow-md cursor-pointer"
+                  onMouseEnter={() => setHoveredSection("guidance")}
+                  onMouseLeave={() => setHoveredSection(null)}
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <Target size={16} className={`text-[#3A5AFE] transition-transform duration-200 ${
+                      hoveredSection === "guidance" ? "scale-110 rotate-3" : ""
+                    }`} />
+                    <h4 className="text-sm font-semibold text-gray-900">Strategic Guidance</h4>
+                  </div>
+                  <div className="space-y-1.5">
+                    {demoBriefing.strategicGuidance.map((point, index) => (
+                      <div 
+                        key={index} 
+                        className="flex items-start gap-2 text-xs text-gray-700 transition-all duration-200 hover:text-[#3A5AFE]"
+                      >
+                        <CheckCircle2 size={12} className="text-[#3A5AFE] mt-0.5 flex-shrink-0 transition-transform duration-200 hover:scale-125" />
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action Items */}
+                <div 
+                  className="bg-gray-50 rounded-lg p-4 border border-gray-200 transition-all duration-200 hover:bg-white hover:border-[#3A5AFE]/30 hover:shadow-md cursor-pointer"
+                  onMouseEnter={() => setHoveredSection("actions")}
+                  onMouseLeave={() => setHoveredSection(null)}
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <ListChecks size={16} className={`text-[#3A5AFE] transition-transform duration-200 ${
+                      hoveredSection === "actions" ? "scale-110 rotate-3" : ""
+                    }`} />
+                    <h4 className="text-sm font-semibold text-gray-900">Action Items</h4>
+                  </div>
+                  <div className="space-y-2">
+                    {demoBriefing.actionItems.map((item, index) => (
+                      <div 
+                        key={index} 
+                        className="flex items-center gap-2 text-xs text-gray-700 transition-all duration-200 hover:text-[#3A5AFE] group/item"
+                      >
+                        <div className={`w-3 h-3 rounded border-2 flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                          item.completed 
+                            ? "bg-[#3A5AFE] border-[#3A5AFE] group-hover/item:scale-110" 
+                            : "border-gray-300 group-hover/item:border-[#3A5AFE]"
+                        }`}>
+                          {item.completed && (
+                            <svg className="w-2 h-2 text-white transition-transform duration-200 group-hover/item:scale-125" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          )}
+                        </div>
+                        <span className={item.completed ? "line-through text-gray-500" : ""}>{item.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* AI Summary */}
+                <div className="bg-[#E8EDFF] rounded-lg p-4 border border-[#3A5AFE]/20 transition-all duration-200 hover:border-[#3A5AFE] hover:shadow-md">
+                  <div className="text-xs font-medium text-[#3A5AFE] mb-2 flex items-center gap-2">
+                    <span>AI Summary</span>
+                    <div className="flex gap-1">
+                      {[0, 1, 2].map((i) => (
+                        <div
+                          key={i}
+                          className="w-1 h-1 rounded-full bg-[#3A5AFE] animate-pulse"
+                          style={{ animationDelay: `${i * 200}ms` }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-700 leading-relaxed">
+                    Strong expansion opportunity with engaged customer. Budget approved. Focus on clear communication, 
+                    addressing concerns proactively, and setting up for successful multi-department rollout.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="lg:w-full">
-        <Image
-          src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3540&q=80"
-          alt="Product Demo"
-          className="w-full"
-          priority={true}
-          width={500}
-          height={500}
-        />
-      </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-4px); }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #3A5AFE;
+          border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #2A3FCC;
+        }
+      `}</style>
     </section>
   );
 };
