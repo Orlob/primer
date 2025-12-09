@@ -16,7 +16,11 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
-    const observerOptions = {
+    const observerOptions: {
+      root: Element | null;
+      rootMargin: string;
+      threshold: number;
+    } = {
       root: null,
       rootMargin: "-20% 0px -60% 0px",
       threshold: 0,

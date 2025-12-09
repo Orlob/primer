@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle2, ArrowRight, ArrowLeft, Link2, Calendar, Zap, Sparkles, Rocket } from "lucide-react";
 
@@ -8,7 +8,7 @@ interface OnboardingStep {
   id: string;
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   fields?: {
     label: string;
     placeholder: string;

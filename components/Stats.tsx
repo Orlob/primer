@@ -82,7 +82,7 @@ const Stats = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="font-semibold text-[32px] leading-[1.2] tracking-tight mb-4 text-[#111827]">
-            Don't just take our word for it
+            Don&apos;t just take our word for it
           </h2>
           <p className="text-lg text-[#374151]">
             Real results from teams using Primer

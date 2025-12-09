@@ -51,7 +51,7 @@ export default async function Dashboard() {
       <div className="max-w-7xl mx-auto px-8 py-12">
         <div className="mb-12">
           <h1 className="text-3xl font-semibold text-gray-900 mb-2">Dashboard</h1>
-          <p className="text-gray-600">Welcome back. Here's your meeting overview.</p>
+          <p className="text-gray-600">Welcome back. Here&apos;s your meeting overview.</p>
         </div>
 
         {/* Onboarding Banner */}

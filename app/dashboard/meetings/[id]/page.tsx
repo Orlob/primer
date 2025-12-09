@@ -97,55 +97,55 @@ const dummyBriefing = {
       {
         date: "Mar 15, 2022",
         event: "Initial onboarding and contract signed",
-        type: "positive",
+        type: "positive" as const,
       },
       {
         date: "Sep 2022",
         event: "First renewal and feature expansion",
-        type: "positive",
+        type: "positive" as const,
       },
       {
         date: "Jun 2023",
         event: "Added marketing team to platform",
-        type: "positive",
+        type: "positive" as const,
       },
       {
         date: "Dec 2023",
         event: "Q4 performance review and expansion discussion",
-        type: "positive",
+        type: "positive" as const,
       },
       {
         date: "Jan 8, 2024",
         event: "Budget approval confirmed for Q1 expansion",
-        type: "positive",
+        type: "positive" as const,
       },
     ],
     implications: "Strong expansion opportunity. Focus on demonstrating clear value, addressing any technical concerns, and setting up for successful multi-department rollout.",
   },
   communications: [
     {
-      type: "Email",
+      type: "Email" as const,
       date: "Jan 10, 2024",
       title: "Q4 Review & Q1 Planning",
       summary: "Sarah confirmed meeting time and shared agenda items. Budget approved for expansion. Looking forward to discussing implementation timeline.",
       hubspotLink: "#",
     },
     {
-      type: "Call",
+      type: "Call" as const,
       date: "Jan 5, 2024",
       title: "Discovery Call - Expansion Opportunities",
       summary: "30-minute call discussing expansion to 3 additional departments. Sarah mentioned interest in advanced analytics features.",
       hubspotLink: "#",
     },
     {
-      type: "Email",
+      type: "Email" as const,
       date: "Dec 20, 2023",
       title: "Q4 Performance Summary",
       summary: "Shared Q4 performance report showing strong ROI and usage metrics. Customer very satisfied with results.",
       hubspotLink: "#",
     },
     {
-      type: "Meeting",
+      type: "Meeting" as const,
       date: "Nov 15, 2023",
       title: "Quarterly Business Review",
       summary: "Discussed current usage, identified expansion opportunities, and aligned on Q1 goals.",
@@ -198,7 +198,8 @@ const tableOfContentsItems = [
 
 export const dynamic = "force-dynamic";
 
-export default function MeetingDetailPage({ params }: { params: { id: string } }) {
+export default async function MeetingDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  await params; // params wird für zukünftige Verwendung benötigt
   const briefing = dummyBriefing;
 
   return (

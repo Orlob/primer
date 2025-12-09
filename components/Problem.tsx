@@ -41,7 +41,7 @@ const Problem = () => {
             <span className="text-[#EF4444] line-through decoration-2">poor preparation</span>.
           </h2>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-            Without Primer, you're manually piecing together context before every meeting. Here's what that looks like.
+            Without Primer, you&apos;re manually piecing together context before every meeting. Here&apos;s what that looks like.
           </p>
         </div>
 
