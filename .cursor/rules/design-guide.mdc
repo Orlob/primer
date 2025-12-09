@@ -1,0 +1,193 @@
+---
+alwaysApply: true
+---
+# PRIMER — BLUEPRINT DESIGN SYSTEM  
+## Design Guide for AI Output
+
+You are designing UI, components, and layouts for the SaaS product **Primer**, using the visual theme **Blueprint Intelligence**.  
+Your output must always follow these design principles, colors, typography, spacing, and component rules.
+
+---
+
+## 1. DESIGN THEME — BLUEPRINT INTELLIGENCE
+Primer visual identity feels like:
+- Engineering blueprints  
+- Clean lines  
+- Precision  
+- Soft tech gradients  
+- Structured layout  
+- Zero fluff  
+- High clarity  
+
+The UI must appear calm, orderly, and “prepared”.
+
+---
+
+## 2. COLOR SYSTEM
+
+### Primary Colors  
+- **Blueprint Indigo:** `#3A5AFE`  
+- **Blueprint Deep Indigo:** `#2A3FCC`  
+- **Blueprint Light:** `#E8EDFF`
+
+### Gray Scale  
+- **Gray 900:** `#111827`  
+- **Gray 700:** `#374151`  
+- **Gray 500:** `#6B7280`  
+- **Gray 300:** `#D1D5DB`  
+- **Gray 100:** `#F3F4F6`
+
+### Status Colors  
+- **Success:** `#22C55E`  
+- **Warning:** `#F59E0B`  
+- **Error:** `#EF4444`
+
+### Usage Rules  
+- Primary = CTAs + interactive highlights  
+- Gray scale = backgrounds, structure, text  
+- Status colors only for alerts, badges, state labels  
+- Never use bright or playful colors  
+
+---
+
+## 3. TYPOGRAPHY
+
+### Fonts  
+- **Headings:** Inter SemiBold  
+- **Body Text:** Inter Regular  
+- **Monospace:** JetBrains Mono
+
+### Font Sizes  
+- H1: 32px / 700  
+- H2: 24px / 600  
+- H3: 20px / 600  
+- Body L: 18px / 400  
+- Body M: 16px / 400  
+- Label: 14px / 500  
+- Small: 13px / 400  
+- Code: 14px JetBrains Mono
+
+### Tone  
+- Clean  
+- Direct  
+- Zero fluff  
+- Engineering-grade clarity  
+
+---
+
+## 4. SPACING & LAYOUT
+
+### Spacing Scale  
+Use these fixed steps only:  
+`4, 8, 12, 16, 24, 32, 48, 64`
+
+### Rules  
+- Section spacing: **64px**  
+- Card padding: **24px**  
+- Vertical spacing between elements: **12–16px**  
+- Max content width: **960px**  
+- Stick to strict vertical rhythm  
+
+Blueprint = grid + order + structure.
+
+---
+
+## 5. COMPONENTS
+
+### Buttons  
+**Primary Button**  
+- Background: `#3A5AFE`  
+- Text: white  
+- Radius: 8px  
+- Padding: 12px 20px  
+- Hover: `#2A3FCC`  
+- Transition: 150ms ease  
+
+**Secondary Button**  
+- Background: white  
+- Border: 1px solid `#D1D5DB`  
+- Text: Gray 700  
+- Hover: Gray 100  
+
+---
+
+### Inputs  
+- Background: white  
+- Border: 1px solid `#D1D5DB`  
+- Radius: 8px  
+- Padding: 12px  
+- Focus ring: `#3A5AFE` glow  
+- Label always above input, 14px, Gray 700  
+
+---
+
+### Cards  
+- Background: white  
+- Border: 1px solid `#E5E7EB`  
+- Radius: 12px  
+- Shadow: subtle `0 4px 12px rgba(0,0,0,0.06)`  
+- Padding: 24px  
+- Title: H3  
+- Body: Body M  
+
+---
+
+### Tables  
+- Header background: Gray 100  
+- Header text: Gray 700  
+- Row divider: Gray 200  
+- Hover row: Gray 50  
+- Padding: 12–16px  
+- Use JetBrains Mono for numbers  
+
+---
+
+## 6. ICONS  
+Use **Lucide Icons**  
+- Size: 18–20px  
+- Color: Gray 700  
+- Line width: clean, engineering style  
+
+---
+
+## 7. MOTION  
+- Hover transitions: 150ms ease  
+- Modal fade: 250ms ease  
+- Small micro-interactions  
+  - Buttons: scale 1.02 on hover  
+  - Cards: slight shadow lift  
+
+No bouncy or playful animations.
+
+---
+
+## 8. CONTENT STYLE  
+All text must be:
+- short  
+- direct  
+- business-ready  
+- structurally clear  
+
+Always prefer:
+- labels  
+- bullets  
+- sections  
+- hierarchy  
+
+Avoid marketing fluff.
+
+---10. OVERALL TONE OF THE PRODUCT
+
+Primer looks and feels like:
+
+a technical instrument
+
+a precise tool
+
+something an engineer would trust
+
+a structured blueprint brought to life
+
+Clarity over style.
+Precision over decoration.
+Purpose over personality.
